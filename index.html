@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mirrors ♡ Nossa História</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Great+Vibes&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg-dark: #0a0c10;
+      --bg-card: rgba(18, 22, 31, 0.75);
+      --accent-silver: #d1d5db;
+      --accent-gold: #e2b86b;
+      --accent-blue: #4a7bb0;
+      --text-light: #f8fafc;
+      --font-title: 'Cinzel', serif;
+      --font-cursive: 'Great Vibes', cursive;
+      --font-body: 'Montserrat', sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-light);
+      font-family: var(--font-body);
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+
+    /* Fundo de espelho com partículas brilhantes */
+    .mirror-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at 50% 30%, #172133 0%, #0a0c10 80%);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .particle {
+      position: absolute;
+      background: rgba(226, 184, 107, 0.4);
+      border-radius: 50%;
+      animation: floatUp linear infinite;
+    }
+
+    @keyframes floatUp {
+      0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+      50% { opacity: 0.8; }
+      100% { transform: translateY(-110vh) rotate(360deg); opacity: 0; }
+    }
+
+    /* Estrutura de Telas */
+    .screen {
+      display: none;
+      min-height: 100vh;
+      width: 100%;
+      padding: 20px;
+      position: relative;
+      z-index: 2;
+      opacity: 0;
+      transition: opacity 1s ease;
+    }
+
+    .screen.active {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      opacity: 1;
+    }
+
+    .container {
+      max-width: 550px;
+      width: 100%;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    /* Tipografia */
+    h1 {
+      font-family: var(--font-title);
+      font-size: 2.2rem;
+      letter-spacing: 2px;
+      color: var(--accent-gold);
+      margin-bottom: 10px;
+      text-transform: uppercase;
+      text-shadow: 0 0 15px rgba(226, 184, 107, 0.3);
+    }
+
+    h2 {
+      font-family: var(--font-title);
+      font-size: 1.6rem;
+      color: var(--accent-silver);
+      margin-bottom: 15px;
+      letter-spacing: 1px;
+    }
+
+    p {
+      font-size: 0.95rem;
+      line-height: 1.8;
+      color: #cbd5e1;
+      margin-bottom: 15px;
+      font-weight: 300;
+      text-align: justify;
+    }
+
+    .cursive {
+      font-family: var(--font-cursive);
+      font-size: 2.2rem;
+      color: var(--accent-gold);
+      display: block;
+      margin: 15px 0;
+    }
+
+    .quote {
+      font-style: italic;
+      color: var(--accent-silver);
+      border-left: 2px solid var(--accent-gold);
+      padding-left: 12px;
+      margin: 20px 0;
+      text-align: left;
+    }
+
+    /* Botão Espelhado */
+    .btn {
+      background: linear-gradient(135deg, rgba(226, 184, 107, 0.2), rgba(74, 123, 176, 0.2));
+      border: 1px solid var(--accent-gold);
+      color: var(--text-light);
+      padding: 14px 32px;
+      border-radius: 30px;
+      font-family: var(--font-title);
+      font-size: 0.85rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.4s ease;
+      margin-top: 20px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+    }
+
+    .btn:active {
+      transform: scale(0.98);
+      background: var(--accent-gold);
+      color: var(--bg-dark);
+    }
+
+    /* Moldura Polaroid Espelhada */
+    .polaroid {
+      background: #ffffff;
+      padding: 12px 12px 28px 12px;
+      border-radius: 4px;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.7), 0 0 20px rgba(226, 184, 107, 0.2);
+      transform: rotate(-1.5deg);
+      margin: 25px auto;
+      max-width: 92%;
+      transition: transform 0.3s ease;
+    }
+
+    .polaroid img, .polaroid video {
+      width: 100%;
+      height: 340px;
+      object-fit: cover;
+      border-radius: 2px;
+      display: block;
+    }
+
+    .polaroid-caption {
+      color: #1e293b;
+      font-family: var(--font-cursive);
+      font-size: 1.6rem;
+      margin-top: 10px;
+      text-align: center;
+    }
+
+    /* Grid da Galeria */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-top: 25px;
+    }
+
+    .gallery-item {
+      background: #fff;
+      padding: 8px 8px 18px 8px;
+      border-radius: 4px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+    }
+
+    .gallery-item img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+      border-radius: 2px;
+    }
+
+    .gallery-item span {
+      color: #334155;
+      font-family: var(--font-cursive);
+      font-size: 1.2rem;
+      display: block;
+      margin-top: 4px;
+    }
+
+    /* Experiência Principal */
+    #main-experience {
+      display: none;
+      opacity: 0;
+      transition: opacity 1s ease;
+      position: relative;
+      z-index: 2;
+    }
+
+    .story-section {
+      padding: 60px 20px;
+      border-bottom: 1px solid rgba(226, 184, 107, 0.15);
+      background: rgba(10, 12, 16, 0.4);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Música de fundo: Mirrors - Justin Timberlake -->
+  <audio id="bgMusic" loop preload="auto">
+    <source src="https://files.catbox.moe/5f1l1e.mp3" type="audio/mpeg">
+  </audio>
+
+  <div class="mirror-bg"></div>
+  <div class="particles" id="particles"></div>
+
+  <!-- TELA 1: ABERTURA -->
+  <section class="screen active" id="screen-1">
+    <div class="container">
+      <h1>Mirrors</h1>
+      <span class="cursive">You are my depth, you are my mirror</span>
+      <p style="text-align: center; margin-top: 15px;">Uma história escrita no olhar de quem se reflete no outro.</p>
+      <button class="btn" onclick="nextScreen('screen-1', 'screen-2')">Entrar na Nossa História</button>
+    </div>
+  </section>
+
+  <!-- TELA 2: SENHA / BEM-VINDO -->
+  <section class="screen" id="screen-2">
+    <div class="container">
+      <h2>O Nosso Espelho</h2>
+      <p style="text-align: center;">Cada momento guardado aqui é um reflexo do que sentimos.</p>
+      <input type="password" id="passInput" style="width: 80%; padding: 14px; border-radius: 25px; border: 1px solid var(--accent-gold); background: rgba(10, 12, 16, 0.8); color: #fff; text-align: center; margin: 20px 0; outline: none; font-size: 1rem;" placeholder="Digite a senha especial">
+      <br>
+      <button class="btn" onclick="checkPassword()">Revelar Lembranças</button>
+      <p id="errorMsg" style="color: #f87171; font-size: 0.85rem; display: none; text-align: center; margin-top: 12px;">
+        Essa lembrança ainda não abriu... tente novamente. ♡
+      </p>
+    </div>
+  </section>
+
+  <!-- TELA 3: CONFIRMAÇÃO & MÚSICA -->
+  <section class="screen" id="screen-3">
+    <div class="container">
+      <h2>Você está pronto?</h2>
+      <span class="cursive">“It's like you're my mirror, my mirror staring back at me”</span>
+      <button class="btn" onclick="startExperience()">Tocar a Música & Iniciar ♫</button>
+    </div>
+  </section>
+
+  <!-- EXPERIÊNCIA PRINCIPAL COM O VÍDEO E AS FOTOS -->
+  <main id="main-experience">
+
+    <!-- CAPÍTULO 1: VÍDEO EM DESTAQUE -->
+    <section class="story-section">
+      <div class="container">
+        <h2>O Nosso Momento em Vídeo</h2>
+        <span class="cursive">Um registro em movimento...</span>
+
+        <div class="polaroid">
+          <video id="storyVideo" autoplay loop muted playsinline controls>
+            <source src="https://files.catbox.moe/wjmhlp.mov" type="video/mp4">
+            <source src="https://files.catbox.moe/wjmhlp.mov" type="video/quicktime">
+            Seu navegador não suporta vídeos em HTML5.
+          </video>
+          <div class="polaroid-caption">A nossa energia ♡</div>
+        </div>
+
+        <div class="quote">
+          “Aren't you somethin' to admire? 'Cause your shine is somethin' like a mirror...”
+        </div>
+
+        <p>Existem momentos que ganham ainda mais vida quando guardados em movimento. Ver o nosso sorriso e sentir a nossa sintonia em vídeo lembra que a nossa conexão é única e especial.</p>
+      </div>
+    </section>
+
+    <!-- CAPÍTULO 2 -->
+    <section class="story-section">
+      <div class="container">
+        <h2>O Primeiro Olhar</h2>
+        <span class="cursive">Quando tudo começou...</span>
+
+        <div class="polaroid" style="transform: rotate(2deg);">
+          <img src="https://i.ibb.co/7xSwM35c/a02bccd9-3b7c-411f-b46b-129d7835f4a1.jpg" alt="Foto 1">
+          <div class="polaroid-caption">O nosso começo ♡</div>
+        </div>
+
+        <p>Desde o primeiro momento, ficou claro que havia algo diferente no ar, uma conexão que parecia se refletir em cada conversa e em cada sorriso compartilhado.</p>
+      </div>
+    </section>
+
+    <!-- CAPÍTULO 3 -->
+    <section class="story-section">
+      <div class="container">
+        <h2>Sintonia Perfeita</h2>
+        <span class="cursive">Dois caminhos que se uniram</span>
+
+        <div class="polaroid" style="transform: rotate(-2deg);">
+          <img src="https://i.ibb.co/3Ym0q0rN/a1970a49-c823-4ebb-8a91-0d1286439458.jpg" alt="Foto 2">
+          <div class="polaroid-caption">Lembrança especial ♡</div>
+        </div>
+
+        <div class="quote">
+          “I can't ever change you, yesterday is history, tomorrow is a mystery...”
+        </div>
+
+        <p>Com o tempo, percebemos o quanto nos completamos. Cada risada, cada abraço e cada pequeno detalhe do dia a dia foram construindo o nosso porto seguro.</p>
+      </div>
+    </section>
+
+    <!-- CAPÍTULO 4 -->
+    <section class="story-section">
+      <div class="container">
+        <h2>A Nossa Cumplicidade</h2>
+        <span class="cursive">O espelho da alma</span>
+
+        <div class="polaroid" style="transform: rotate(1.5deg);">
+          <img src="https://i.ibb.co/ZDGMV6K/f03c5f27-5faa-4f1f-b422-9e1d91470d26.jpg" alt="Foto 3">
+          <div class="polaroid-caption">Sempre juntas/juntos ♡</div>
+        </div>
+
+        <p>É incrível como conseguimos nos entender apenas com um olhar. Ter alguém que reflete os nossos melhores sentimentos é o maior presente que a vida poderia dar.</p>
+      </div>
+    </section>
+
+    <!-- GALERIA DE MEMÓRIAS COMPLEMENTAR -->
+    <section class="story-section">
+      <div class="container">
+        <h2>Outros Ângulos & Memórias</h2>
+        <span class="cursive">Mais momentos especiais</span>
+
+        <div class="gallery-grid">
+          <div class="gallery-item">
+            <img src="https://i.ibb.co/3YLgXdLx/a47ab49c-2604-4d0d-b55a-d2837055c813.jpg" alt="Foto 4">
+            <span>Sorrisos ♡</span>
+          </div>
+          <div class="gallery-item">
+            <img src="https://i.ibb.co/cXDWgdwx/397173bd-b764-45e9-bccc-07069fc46009.jpg" alt="Foto 5">
+            <span>Momentos ♡</span>
+          </div>
+          <div class="gallery-item" style="grid-column: span 2;">
+            <img src="https://i.ibb.co/99qcS8d4/6752c30d-131f-46fe-a981-b96ecc6f22a4.jpg" alt="Foto 6" style="height: 220px;">
+            <span>União para sempre ♡</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FINALIZANDO COM A MÚSICA -->
+    <section class="story-section" style="text-align: center; padding-bottom: 90px;">
+      <div class="container">
+        <h1>You Are My Mirror</h1>
+        <span class="cursive" style="font-size: 2.5rem; margin-bottom: 20px;">“Girl, you're my reflection, all I see is you...”</span>
+
+        <p style="text-align: center;">Que o nosso espelho continue refletindo apenas amor, alegria e novos momentos inesquecíveis.</p>
+        
+        <h2 style="margin-top: 30px; color: var(--accent-gold);">Com todo o meu carinho! ♡</h2>
+      </div>
+    </section>
+
+  </main>
+
+  <script>
+    const CORRECT_PASSWORD = "2024";
+
+    function createParticles() {
+      const container = document.getElementById('particles');
+      for (let i = 0; i < 25; i++) {
+        const p = document.createElement('div');
+        p.classList.add('particle');
+        const size = Math.random() * 6 + 2 + 'px';
+        p.style.width = size;
+        p.style.height = size;
+        p.style.left = Math.random() * 100 + '%';
+        p.style.animationDuration = Math.random() * 10 + 6 + 's';
+        p.style.animationDelay = Math.random() * 5 + 's';
+        container.appendChild(p);
+      }
+    }
+
+    function nextScreen(currentId, nextId) {
+      const current = document.getElementById(currentId);
+      const next = document.getElementById(nextId);
+      current.style.opacity = '0';
+      setTimeout(() => {
+        current.classList.remove('active');
+        next.classList.add('active');
+        setTimeout(() => { next.style.opacity = '1'; }, 50);
+      }, 800);
+    }
+
+    function checkPassword() {
+      const input = document.getElementById('passInput').value;
+      const errorMsg = document.getElementById('errorMsg');
+      if (input === CORRECT_PASSWORD || input.trim() !== "") {
+        errorMsg.style.display = 'none';
+        nextScreen('screen-2', 'screen-3');
+      } else {
+        errorMsg.style.display = 'block';
+      }
+    }
+
+    function startExperience() {
+      const audio = document.getElementById('bgMusic');
+      const video = document.getElementById('storyVideo');
+
+      if(audio) { audio.play().catch(() => {}); }
+      if(video) { video.play().catch(() => {}); }
+
+      const screen3 = document.getElementById('screen-3');
+      const mainExp = document.getElementById('main-experience');
+      screen3.style.opacity = '0';
+      setTimeout(() => {
+        screen3.classList.remove('active');
+        screen3.style.display = 'none';
+        mainExp.style.display = 'block';
+        setTimeout(() => {
+          mainExp.style.opacity = '1';
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }, 50);
+      }, 800);
+    }
+
+    window.onload = createParticles;
+  </script>
+</body>
+</html>
