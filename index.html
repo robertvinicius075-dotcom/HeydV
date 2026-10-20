@@ -12,7 +12,6 @@
   <style>
     :root {
       --bg-dark: #0a0c10;
-      --bg-card: rgba(18, 22, 31, 0.75);
       --accent-silver: #d1d5db;
       --accent-gold: #e2b86b;
       --accent-blue: #4a7bb0;
@@ -171,10 +170,9 @@
       transform: rotate(-1.5deg);
       margin: 25px auto;
       max-width: 92%;
-      transition: transform 0.3s ease;
     }
 
-    .polaroid img, .polaroid video {
+    .polaroid img {
       width: 100%;
       height: 340px;
       object-fit: cover;
@@ -238,7 +236,7 @@
 </head>
 <body>
 
-  <!-- Música de fundo: Mirrors - Justin Timberlake -->
+  <!-- Áudio enviado integrado -->
   <audio id="bgMusic" loop preload="auto">
     <source src="https://files.catbox.moe/5f1l1e.mp3" type="audio/mpeg">
   </audio>
@@ -246,96 +244,69 @@
   <div class="mirror-bg"></div>
   <div class="particles" id="particles"></div>
 
-  <!-- TELA 1: ABERTURA -->
+  <!-- TELA 1: ABERTURA COM BOTÃO DIRETO -->
   <section class="screen active" id="screen-1">
     <div class="container">
       <h1>Mirrors</h1>
       <span class="cursive">You are my depth, you are my mirror</span>
       <p style="text-align: center; margin-top: 15px;">Uma história escrita no olhar de quem se reflete no outro.</p>
-      <button class="btn" onclick="nextScreen('screen-1', 'screen-2')">Entrar na Nossa História</button>
+      <button class="btn" onclick="startExperience()">Iniciar a Nossa História ♫</button>
     </div>
   </section>
 
-  <!-- TELA 2: SENHA / BEM-VINDO -->
-  <section class="screen" id="screen-2">
-    <div class="container">
-      <h2>O Nosso Espelho</h2>
-      <p style="text-align: center;">Cada momento guardado aqui é um reflexo do que sentimos.</p>
-      <input type="password" id="passInput" style="width: 80%; padding: 14px; border-radius: 25px; border: 1px solid var(--accent-gold); background: rgba(10, 12, 16, 0.8); color: #fff; text-align: center; margin: 20px 0; outline: none; font-size: 1rem;" placeholder="Digite a senha especial">
-      <br>
-      <button class="btn" onclick="checkPassword()">Revelar Lembranças</button>
-      <p id="errorMsg" style="color: #f87171; font-size: 0.85rem; display: none; text-align: center; margin-top: 12px;">
-        Essa lembrança ainda não abriu... tente novamente. ♡
-      </p>
-    </div>
-  </section>
-
-  <!-- TELA 3: CONFIRMAÇÃO & MÚSICA -->
-  <section class="screen" id="screen-3">
-    <div class="container">
-      <h2>Você está pronto?</h2>
-      <span class="cursive">“It's like you're my mirror, my mirror staring back at me”</span>
-      <button class="btn" onclick="startExperience()">Tocar a Música & Iniciar ♫</button>
-    </div>
-  </section>
-
-  <!-- EXPERIÊNCIA PRINCIPAL COM O VÍDEO E AS FOTOS -->
+  <!-- EXPERIÊNCIA PRINCIPAL COM AS FOTOS -->
   <main id="main-experience">
 
-    <!-- CAPÍTULO 1: VÍDEO EM DESTAQUE -->
+    <!-- CAPÍTULO 1 -->
     <section class="story-section">
       <div class="container">
-        <h2>O Nosso Momento em Vídeo</h2>
-        <span class="cursive">Um registro em movimento...</span>
+        <h2>O Primeiro Olhar</h2>
+        <span class="cursive">Quando tudo começou...</span>
 
         <div class="polaroid">
-          <video id="storyVideo" autoplay loop muted playsinline controls>
-            <source src="https://files.catbox.moe/wjmhlp.mov" type="video/mp4">
-            <source src="https://files.catbox.moe/wjmhlp.mov" type="video/quicktime">
-            Seu navegador não suporta vídeos em HTML5.
-          </video>
-          <div class="polaroid-caption">A nossa energia ♡</div>
+          <img src="https://i.ibb.co/7xSwM35c/a02bccd9-3b7c-411f-b46b-129d7835f4a1.jpg" alt="Foto 1">
+          <div class="polaroid-caption">O nosso começo ♡</div>
         </div>
 
         <div class="quote">
           “Aren't you somethin' to admire? 'Cause your shine is somethin' like a mirror...”
         </div>
 
-        <p>Existem momentos que ganham ainda mais vida quando guardados em movimento. Ver o nosso sorriso e sentir a nossa sintonia em vídeo lembra que a nossa conexão é única e especial.</p>
+        <p>Existem encontros que não acontecem por acaso. Desde o primeiro momento, ficou claro que havia algo diferente no ar, uma conexão que parecia se refletir em cada conversa e em cada sorriso compartilhado.</p>
       </div>
     </section>
 
     <!-- CAPÍTULO 2 -->
     <section class="story-section">
       <div class="container">
-        <h2>O Primeiro Olhar</h2>
-        <span class="cursive">Quando tudo começou...</span>
+        <h2>Sintonia Perfeita</h2>
+        <span class="cursive">Dois caminhos que se uniram</span>
 
         <div class="polaroid" style="transform: rotate(2deg);">
-          <img src="https://i.ibb.co/7xSwM35c/a02bccd9-3b7c-411f-b46b-129d7835f4a1.jpg" alt="Foto 1">
-          <div class="polaroid-caption">O nosso começo ♡</div>
+          <img src="https://i.ibb.co/3Ym0q0rN/a1970a49-c823-4ebb-8a91-0d1286439458.jpg" alt="Foto 2">
+          <div class="polaroid-caption">Lembrança especial ♡</div>
         </div>
 
-        <p>Desde o primeiro momento, ficou claro que havia algo diferente no ar, uma conexão que parecia se refletir em cada conversa e em cada sorriso compartilhado.</p>
+        <p>Com o tempo, percebemos o quanto nos completamos. Cada risada, cada abraço e cada pequeno detalhe do dia a dia foram construindo o nosso porto seguro.</p>
       </div>
     </section>
 
     <!-- CAPÍTULO 3 -->
     <section class="story-section">
       <div class="container">
-        <h2>Sintonia Perfeita</h2>
-        <span class="cursive">Dois caminhos que se uniram</span>
+        <h2>Momentos Inesquecíveis</h2>
+        <span class="cursive">Reflexos de felicidade</span>
 
         <div class="polaroid" style="transform: rotate(-2deg);">
-          <img src="https://i.ibb.co/3Ym0q0rN/a1970a49-c823-4ebb-8a91-0d1286439458.jpg" alt="Foto 2">
-          <div class="polaroid-caption">Lembrança especial ♡</div>
+          <img src="https://i.ibb.co/ZDGMV6K/f03c5f27-5faa-4f1f-b422-9e1d91470d26.jpg" alt="Foto 3">
+          <div class="polaroid-caption">Para sempre guardado ♡</div>
         </div>
 
         <div class="quote">
           “I can't ever change you, yesterday is history, tomorrow is a mystery...”
         </div>
 
-        <p>Com o tempo, percebemos o quanto nos completamos. Cada risada, cada abraço e cada pequeno detalhe do dia a dia foram construindo o nosso porto seguro.</p>
+        <p>Olhar para trás e ver tudo o que já vivemos traz a paz de saber que a nossa história está apenas começando. São memórias marcadas pelo carinho e pela cumplicidade.</p>
       </div>
     </section>
 
@@ -346,8 +317,8 @@
         <span class="cursive">O espelho da alma</span>
 
         <div class="polaroid" style="transform: rotate(1.5deg);">
-          <img src="https://i.ibb.co/ZDGMV6K/f03c5f27-5faa-4f1f-b422-9e1d91470d26.jpg" alt="Foto 3">
-          <div class="polaroid-caption">Sempre juntas/juntos ♡</div>
+          <img src="https://i.ibb.co/3YLgXdLx/a47ab49c-2604-4d0d-b55a-d2837055c813.jpg" alt="Foto 4">
+          <div class="polaroid-caption">Sempre juntos ♡</div>
         </div>
 
         <p>É incrível como conseguimos nos entender apenas com um olhar. Ter alguém que reflete os nossos melhores sentimentos é o maior presente que a vida poderia dar.</p>
@@ -362,22 +333,18 @@
 
         <div class="gallery-grid">
           <div class="gallery-item">
-            <img src="https://i.ibb.co/3YLgXdLx/a47ab49c-2604-4d0d-b55a-d2837055c813.jpg" alt="Foto 4">
+            <img src="https://i.ibb.co/cXDWgdwx/397173bd-b764-45e9-bccc-07069fc46009.jpg" alt="Foto 5">
             <span>Sorrisos ♡</span>
           </div>
           <div class="gallery-item">
-            <img src="https://i.ibb.co/cXDWgdwx/397173bd-b764-45e9-bccc-07069fc46009.jpg" alt="Foto 5">
-            <span>Momentos ♡</span>
-          </div>
-          <div class="gallery-item" style="grid-column: span 2;">
-            <img src="https://i.ibb.co/99qcS8d4/6752c30d-131f-46fe-a981-b96ecc6f22a4.jpg" alt="Foto 6" style="height: 220px;">
-            <span>União para sempre ♡</span>
+            <img src="https://i.ibb.co/99qcS8d4/6752c30d-131f-46fe-a981-b96ecc6f22a4.jpg" alt="Foto 6">
+            <span>União ♡</span>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- FINALIZANDO COM A MÚSICA -->
+    <!-- FINALIZANDO -->
     <section class="story-section" style="text-align: center; padding-bottom: 90px;">
       <div class="container">
         <h1>You Are My Mirror</h1>
@@ -392,8 +359,6 @@
   </main>
 
   <script>
-    const CORRECT_PASSWORD = "2024";
-
     function createParticles() {
       const container = document.getElementById('particles');
       for (let i = 0; i < 25; i++) {
@@ -409,41 +374,17 @@
       }
     }
 
-    function nextScreen(currentId, nextId) {
-      const current = document.getElementById(currentId);
-      const next = document.getElementById(nextId);
-      current.style.opacity = '0';
-      setTimeout(() => {
-        current.classList.remove('active');
-        next.classList.add('active');
-        setTimeout(() => { next.style.opacity = '1'; }, 50);
-      }, 800);
-    }
-
-    function checkPassword() {
-      const input = document.getElementById('passInput').value;
-      const errorMsg = document.getElementById('errorMsg');
-      if (input === CORRECT_PASSWORD || input.trim() !== "") {
-        errorMsg.style.display = 'none';
-        nextScreen('screen-2', 'screen-3');
-      } else {
-        errorMsg.style.display = 'block';
-      }
-    }
-
     function startExperience() {
       const audio = document.getElementById('bgMusic');
-      const video = document.getElementById('storyVideo');
-
       if(audio) { audio.play().catch(() => {}); }
-      if(video) { video.play().catch(() => {}); }
 
-      const screen3 = document.getElementById('screen-3');
+      const screen1 = document.getElementById('screen-1');
       const mainExp = document.getElementById('main-experience');
-      screen3.style.opacity = '0';
+      
+      screen1.style.opacity = '0';
       setTimeout(() => {
-        screen3.classList.remove('active');
-        screen3.style.display = 'none';
+        screen1.classList.remove('active');
+        screen1.style.display = 'none';
         mainExp.style.display = 'block';
         setTimeout(() => {
           mainExp.style.opacity = '1';
