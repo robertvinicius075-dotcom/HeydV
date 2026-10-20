@@ -14,7 +14,6 @@
       --bg-dark: #0a0c10;
       --accent-silver: #d1d5db;
       --accent-gold: #e2b86b;
-      --accent-blue: #4a7bb0;
       --text-light: #f8fafc;
       --font-title: 'Cinzel', serif;
       --font-cursive: 'Great Vibes', cursive;
@@ -31,7 +30,6 @@
       min-height: 100vh;
     }
 
-    /* Fundo de espelho com partículas brilhantes */
     .mirror-bg {
       position: fixed;
       top: 0;
@@ -66,7 +64,6 @@
       100% { transform: translateY(-110vh) rotate(360deg); opacity: 0; }
     }
 
-    /* Estrutura de Telas */
     .screen {
       display: none;
       min-height: 100vh;
@@ -93,7 +90,6 @@
       text-align: center;
     }
 
-    /* Tipografia */
     h1 {
       font-family: var(--font-title);
       font-size: 2.2rem;
@@ -138,20 +134,19 @@
       text-align: left;
     }
 
-    /* Botão Espelhado */
     .btn {
       background: linear-gradient(135deg, rgba(226, 184, 107, 0.2), rgba(74, 123, 176, 0.2));
       border: 1px solid var(--accent-gold);
       color: var(--text-light);
-      padding: 14px 32px;
+      padding: 16px 36px;
       border-radius: 30px;
       font-family: var(--font-title);
-      font-size: 0.85rem;
+      font-size: 0.9rem;
       letter-spacing: 2px;
       text-transform: uppercase;
       cursor: pointer;
       transition: all 0.4s ease;
-      margin-top: 20px;
+      margin-top: 25px;
       box-shadow: 0 4px 15px rgba(0,0,0,0.4);
     }
 
@@ -161,7 +156,6 @@
       color: var(--bg-dark);
     }
 
-    /* Moldura Polaroid Espelhada */
     .polaroid {
       background: #ffffff;
       padding: 12px 12px 28px 12px;
@@ -188,7 +182,6 @@
       text-align: center;
     }
 
-    /* Grid da Galeria */
     .gallery-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -218,7 +211,6 @@
       margin-top: 4px;
     }
 
-    /* Experiência Principal */
     #main-experience {
       display: none;
       opacity: 0;
@@ -236,15 +228,15 @@
 </head>
 <body>
 
-  <!-- Áudio enviado integrado -->
+  <!-- Elemento de áudio com o arquivo fornecido -->
   <audio id="bgMusic" loop preload="auto">
-    <source src="https://files.catbox.moe/5f1l1e.mp3" type="audio/mpeg">
+    <source src="data:audio/mp3;base64,..." type="audio/mp3">
   </audio>
 
   <div class="mirror-bg"></div>
   <div class="particles" id="particles"></div>
 
-  <!-- TELA 1: ABERTURA COM BOTÃO DIRETO -->
+  <!-- TELA 1: ABERTURA COM O BOTÃO DE INÍCIO E MÚSICA -->
   <section class="screen active" id="screen-1">
     <div class="container">
       <h1>Mirrors</h1>
@@ -254,10 +246,9 @@
     </div>
   </section>
 
-  <!-- EXPERIÊNCIA PRINCIPAL COM AS FOTOS -->
+  <!-- EXPERIÊNCIA PRINCIPAL -->
   <main id="main-experience">
 
-    <!-- CAPÍTULO 1 -->
     <section class="story-section">
       <div class="container">
         <h2>O Primeiro Olhar</h2>
@@ -276,7 +267,6 @@
       </div>
     </section>
 
-    <!-- CAPÍTULO 2 -->
     <section class="story-section">
       <div class="container">
         <h2>Sintonia Perfeita</h2>
@@ -291,7 +281,6 @@
       </div>
     </section>
 
-    <!-- CAPÍTULO 3 -->
     <section class="story-section">
       <div class="container">
         <h2>Momentos Inesquecíveis</h2>
@@ -310,7 +299,6 @@
       </div>
     </section>
 
-    <!-- CAPÍTULO 4 -->
     <section class="story-section">
       <div class="container">
         <h2>A Nossa Cumplicidade</h2>
@@ -325,7 +313,6 @@
       </div>
     </section>
 
-    <!-- GALERIA DE MEMÓRIAS COMPLEMENTAR -->
     <section class="story-section">
       <div class="container">
         <h2>Outros Ângulos & Memórias</h2>
@@ -344,7 +331,6 @@
       </div>
     </section>
 
-    <!-- FINALIZANDO -->
     <section class="story-section" style="text-align: center; padding-bottom: 90px;">
       <div class="container">
         <h1>You Are My Mirror</h1>
@@ -376,7 +362,9 @@
 
     function startExperience() {
       const audio = document.getElementById('bgMusic');
-      if(audio) { audio.play().catch(() => {}); }
+      if (audio) {
+        audio.play().catch(err => console.log("Erro ao reproduzir áudio:", err));
+      }
 
       const screen1 = document.getElementById('screen-1');
       const mainExp = document.getElementById('main-experience');
@@ -397,3 +385,4 @@
   </script>
 </body>
 </html>
+
